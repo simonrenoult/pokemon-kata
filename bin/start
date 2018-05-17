@@ -1,0 +1,23 @@
+#!/usr/env node
+
+const { log } = require("util");
+const server = require("../src/server");
+
+const PORT = getPort();
+
+server.listen(PORT, () => {
+  log("Server listening on port %s", PORT);
+});
+
+function getPort() {
+  const DEFAULT_PORT = 3000;
+
+  let port = process.env.NODE_ENV || DEFAULT_PORT;
+  try {
+    port = parseInt(port, 10);
+  } catch (e) {
+    port = DEFAULT_PORT;
+  }
+
+  return port;
+}
